@@ -1,5 +1,9 @@
 import { ReactChild } from "react"
 import Head from 'next/head'
+import dynamic from 'next/dynamic'
+import { FrameProps } from "framer"
+
+const Frame = dynamic<Partial<FrameProps>>(() => import('framer').then((framer) => framer.Frame), { ssr: false })
 
 interface Props {
     title: string;
@@ -24,7 +28,9 @@ const Layout: React.FC<Props> = ({ title, children }) => {
             </main>
 
             <footer>
-                <h2>Footer</h2>
+                <Frame position="relative" width="100%" height="auto">
+                    <h2>Footer</h2>
+                </Frame>
             </footer>
         </div>
     )
